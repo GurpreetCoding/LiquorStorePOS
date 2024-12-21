@@ -42,5 +42,30 @@ namespace LiquorStorePOS
             return allCats;
 
         }
+
+        public double GetTax(int id)
+        {
+            double taxPercent = 0.00;
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand("Select cat_tax FROM Category WHERE cat_id = @cat_id", connection);
+
+            command.Parameters.AddWithValue("@cat_id", id);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    taxPercent = reader.GetDouble(0);
+
+                }
+            }
+
+            connection.Close();
+            return taxPercent;
+        }
     }
 }

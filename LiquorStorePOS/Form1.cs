@@ -1,4 +1,6 @@
 
+using System.Linq.Expressions;
+
 namespace LiquorStorePOS
 {
     public partial class Form1 : Form
@@ -29,7 +31,7 @@ namespace LiquorStorePOS
 
             ordersBindingSource.DataSource= ords;
 
-            dataGridView1.DataSource = ordersBindingSource;
+            //dataGridView1.DataSource = ordersBindingSource;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -41,7 +43,7 @@ namespace LiquorStorePOS
 
             itemsBindingSource.DataSource = itms;
 
-            dataGridView2.DataSource = itemsBindingSource;
+            //dataGridView2.DataSource = itemsBindingSource;
 
         }
 
@@ -94,7 +96,7 @@ namespace LiquorStorePOS
 
             categoryBindingSource.DataSource = categories;
 
-            dataGridView3.DataSource = categoryBindingSource;
+            //dataGridView3.DataSource = categoryBindingSource;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -106,12 +108,13 @@ namespace LiquorStorePOS
 
             sizeBindingSource.DataSource = sizes;
 
-            dataGridView4.DataSource = sizeBindingSource;
+            //dataGridView4.DataSource = sizeBindingSource;
 
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            /*
             if(e.KeyChar == (char)Keys.Enter)
             {
                 e.Handled= true;
@@ -150,34 +153,122 @@ namespace LiquorStorePOS
                 label1.Text = orderTotal.ToString("F2");
 
             }
-        }
+            */
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //this button deletes an item
-            int index = listBox1.SelectedIndex;
-            int index2 = listBox2.SelectedIndex;
-            if (index == index2)
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                listBox1.Items.RemoveAt(index);
-                listBox2.Items.RemoveAt(index);
+                e.Handled = true;
+                //listBox1.Items.Add(textBox1.Text);
+                //textBox1.Clear();
 
-                double orderTotal = 0;
+                //This line gets the SKU from the textbox
+                String SKU = textBox1.Text;
 
-                for (int x = 0; x < listBox2.Items.Count; x++)
-                {
-                    orderTotal += Convert.ToDouble(listBox2.Items[x].ToString());
-                }
+                //This line creates the items/sizes Database access object 
+                ItemsDAO itemsDAO = new ItemsDAO();
+                SizeDAO sizeDAO = new SizeDAO();
+                CategoryDAO catDAO = new CategoryDAO();
+                //This line gets the item associated with the SKU
+                Item theItem = itemsDAO.getItemBySKU(SKU);
+
+                //listBox1.Items.Add(theItem.item_name.ToString());
+
+                Panel p = new Panel();
+                p.Size = new System.Drawing.Size(475, 100);
+                p.BackColor = System.Drawing.Color.Lavender;
+
+                Label UPC = new Label();
+                Label Name = new Label(); 
+                Label Price = new Label();
+                Label Tax = new Label();
+                Label Size = new Label();
+                Label TotalPrice = new Label();
+                Button Remove = new Button();
+                Remove.Size = new System.Drawing.Size(50, 25);
+
+                UPC.Location = new Point(10,10);
+                Name.Location = new Point(10, 50);
+                Size.Location = new Point(300, 50);
+                Price.Location = new Point(10, 70);
+                Tax.Location = new Point(200, 70);
+                Remove.Location = new Point(400, 10);
+                TotalPrice.Location = new Point(400, 70);
+
+                UPC.Text = theItem.item_sku.ToString();
+
+                string sizeName = sizeDAO.getSizeName(theItem.size_id);
+                //MessageBox.Show(FullName);
+                Name.Text = theItem.item_name;
+                Name.AutoSize = true;
+
+                double taxPercent = catDAO.GetTax(theItem.cat_id);
+                double itemTax = Math.Round((theItem.item_price * taxPercent), 2);
+                Tax.Text = "Tax: " + (itemTax).ToString();
+
+                Size.Text = sizeName;
+
+
+                Price.Text = "Price: " + theItem.item_price.ToString("F2");
+                Remove.Text = "Delete";
+
+                TotalPrice.Text = "Total: " + (Math.Round((itemTax + theItem.item_price),2)).ToString();
+
+                p.Controls.Add(UPC);
+                p.Controls.Add(Name);
+                p.Controls.Add(Price);
+                p.Controls.Add(Size);
+                p.Controls.Add(Tax);
+                p.Controls.Add(Remove);
+                p.Controls.Add(TotalPrice); 
+
+                flowLayoutPanel1.Controls.Add(p);
+
+                //double itemPrice = theItem.item_price;
+
+                //string formatPrice = itemPrice.ToString("F2");
+
+                //listBox2.Items.Add(theItem.item_price.ToString("F2"));
+
+                textBox1.Clear();
+
+                //adding the total price of items into label1
+
+                //MessageBox.Show(listBox2.Items[0].ToString());
+
+                //double orderTotal = 0;
+
+                //for (int x = 0; x < listBox2.Items.Count; x++)
+                //{
+                //    orderTotal += Convert.ToDouble(listBox2.Items[x].ToString());
+                //}
 
                 //MessageBox.Show(orderTotal.ToString());
 
-                label1.Text = orderTotal.ToString("F2");
+                //label1.Text = orderTotal.ToString("F2");
+
             }
-            else
-            {
-                MessageBox.Show("Must select the same row for name and price to delete");
-            }
-            
         }
+        /*
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Panel p = new Panel();
+            Label UPC = new Label();
+            Label Name = new Label();
+            Label Price = new Label();
+            UPC.Text = "078742051451";
+            Name.Text = "Member's Mark Purified Water";
+            Price.Text = "1.00";
+            p.Size = new System.Drawing.Size(250, 100);
+            p.BackColor = System.Drawing.Color.Orange;
+            UPC.Location = new Point(10, 10);
+            Name.Location = new Point(10, 30);
+            Price.Location = new Point(200, 30);
+            p.Controls.Add(UPC);
+            p.Controls.Add(Name);
+            p.Controls.Add(Price);
+
+            flowLayoutPanel1.Controls.Add(p);
+        }
+        */
     }
 }
