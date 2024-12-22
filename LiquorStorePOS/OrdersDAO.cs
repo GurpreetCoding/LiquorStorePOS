@@ -68,5 +68,10 @@ namespace LiquorStorePOS
 
         }
 
+        public void insertOrder(int row_id, String order_id, DateTime dateTime, int quantity, int item_id)
+        {
+            /* insert order information into database */
+        }
+
     }
 }

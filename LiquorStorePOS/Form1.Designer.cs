@@ -34,6 +34,7 @@
             panel4 = new Panel();
             panel3 = new Panel();
             panel2 = new Panel();
+            button1 = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,11 +87,22 @@
             panel2.Size = new System.Drawing.Size(158, 53);
             panel2.TabIndex = 0;
             // 
+            // button1
+            // 
+            button1.Location = new Point(345, 698);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(167, 23);
+            button1.TabIndex = 21;
+            button1.Text = "Complete Order";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1370, 746);
+            Controls.Add(button1);
             Controls.Add(panel1);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(textBox1);
@@ -108,5 +120,6 @@
         private Panel panel4;
         private Panel panel3;
         private Panel panel2;
+        private Button button1;
     }
 }

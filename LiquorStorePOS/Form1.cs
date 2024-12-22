@@ -1,5 +1,7 @@
 
 using System.Linq.Expressions;
+using System.Linq;
+
 
 namespace LiquorStorePOS
 {
@@ -12,7 +14,7 @@ namespace LiquorStorePOS
 
         List<Orders> ords = new List<Orders>();
         List<Item> itms = new List<Item>();
-        List<Category> categories = new List<Category>();  
+        List<Category> categories = new List<Category>();
         List<Size> sizes = new List<Size>();
         double orderSubtotal;
         double orderTax;
@@ -30,7 +32,7 @@ namespace LiquorStorePOS
 
             ords = ordersDAO.getAllOrders();
 
-            ordersBindingSource.DataSource= ords;
+            ordersBindingSource.DataSource = ords;
 
             //dataGridView1.DataSource = ordersBindingSource;
         }
@@ -58,7 +60,7 @@ namespace LiquorStorePOS
             //gets item primary keys {2,2,3}
             ordsItems = ordersDAO.getAllitems();
 
-            foreach(int item in ordsItems)
+            foreach (int item in ordsItems)
             {
                 //MessageBox.Show(item.ToString());
             }
@@ -68,24 +70,24 @@ namespace LiquorStorePOS
 
             ItemsDAO itemsDAO = new ItemsDAO();
 
-            foreach(int i in ordsItems)
+            foreach (int i in ordsItems)
             {
                 //MessageBox.Show(i.ToString());  
-                itemstotprice.Add(itemsDAO.getItemPrice(i) );
-                itemstotcost.Add(itemsDAO.getItemCost(i)) ;
+                itemstotprice.Add(itemsDAO.getItemPrice(i));
+                itemstotcost.Add(itemsDAO.getItemCost(i));
             }
 
-            foreach(double d in itemstotcost)
+            foreach (double d in itemstotcost)
             {
                 //MessageBox.Show(d.ToString());
             }
 
-            double marginPercent = (1 - (itemstotcost.Sum() / itemstotprice.Sum())) * 100 ;
+            double marginPercent = (1 - (itemstotcost.Sum() / itemstotprice.Sum())) * 100;
 
 
 
-            MessageBox.Show (marginPercent.ToString()); 
-        
+            MessageBox.Show(marginPercent.ToString());
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -179,7 +181,7 @@ namespace LiquorStorePOS
                 p.BackColor = System.Drawing.Color.Lavender;
 
                 Label UPC = new Label();
-                Label Name = new Label(); 
+                Label Name = new Label();
                 Label Price = new Label();
                 Label Tax = new Label();
                 Label Size = new Label();
@@ -187,7 +189,7 @@ namespace LiquorStorePOS
                 Button Remove = new Button();
                 Remove.Size = new System.Drawing.Size(50, 25);
 
-                UPC.Location = new Point(10,10);
+                UPC.Location = new Point(10, 10);
                 Name.Location = new Point(10, 50);
                 Size.Location = new Point(300, 50);
                 Price.Location = new Point(10, 70);
@@ -196,6 +198,7 @@ namespace LiquorStorePOS
                 TotalPrice.Location = new Point(400, 70);
 
                 UPC.Text = theItem.item_sku.ToString();
+                UPC.Name = "UPC";
 
                 string sizeName = sizeDAO.getSizeName(theItem.size_id);
                 //MessageBox.Show(FullName);
@@ -212,7 +215,7 @@ namespace LiquorStorePOS
                 Price.Text = "Price: " + theItem.item_price.ToString("F2");
                 Remove.Text = "Delete";
 
-                TotalPrice.Text = "Total: " + (Math.Round((itemTax + theItem.item_price),2)).ToString();
+                TotalPrice.Text = "Total: " + (Math.Round((itemTax + theItem.item_price), 2)).ToString();
 
                 p.Controls.Add(UPC);
                 p.Controls.Add(Name);
@@ -220,9 +223,57 @@ namespace LiquorStorePOS
                 p.Controls.Add(Size);
                 p.Controls.Add(Tax);
                 p.Controls.Add(Remove);
-                p.Controls.Add(TotalPrice); 
+                p.Controls.Add(TotalPrice);
 
-                flowLayoutPanel1.Controls.Add(p);
+
+                TextBox quantityBox = new TextBox();
+
+                quantityBox.Location = new Point(150, 50);
+
+                quantityBox.Name = "Quantity";
+
+                quantityBox.Text = "1";
+
+                p.Controls.Add(quantityBox);
+                
+                if(flowLayoutPanel1.HasChildren)
+                {
+                    int i = 0;
+                    foreach (Control control in flowLayoutPanel1.Controls)
+                    {
+                        
+                        foreach (Control child in control.Controls)
+                        {
+                            
+                            if (child is Label && child.Name == "UPC")
+                            {
+                                Label l = (Label)child;
+                                if(UPC.Text == l.Text)
+                                {
+                                    String quantityNum = control.Controls["Quantity"].Text;
+                                    control.Controls["Quantity"].Text = (int.Parse(quantityNum) + 1).ToString();
+                                    i++;
+                                }
+                                
+                               
+                            }
+                            
+
+                        }
+                     
+                    }
+                    if (i == 0)
+                    {
+                        flowLayoutPanel1.Controls.Add(p);
+
+                    }
+                }
+                else
+                {
+                    flowLayoutPanel1.Controls.Add(p);
+                }
+
+                
 
 
                 Label subtotal = new Label();
@@ -259,39 +310,48 @@ namespace LiquorStorePOS
 
                 panel3.Controls.Add(fullTotal);
 
-
-
-
-
-                
-
                 textBox1.Clear();
 
 
 
             }
         }
-        /*
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Panel p = new Panel();
-            Label UPC = new Label();
-            Label Name = new Label();
-            Label Price = new Label();
-            UPC.Text = "078742051451";
-            Name.Text = "Member's Mark Purified Water";
-            Price.Text = "1.00";
-            p.Size = new System.Drawing.Size(250, 100);
-            p.BackColor = System.Drawing.Color.Orange;
-            UPC.Location = new Point(10, 10);
-            Name.Location = new Point(10, 30);
-            Price.Location = new Point(200, 30);
-            p.Controls.Add(UPC);
-            p.Controls.Add(Name);
-            p.Controls.Add(Price);
 
-            flowLayoutPanel1.Controls.Add(p);
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Complete Order Button
+            
+
+
+
         }
-        */
+        
+        
+        
+        
+        
+        
+        /*
+private void button2_Click(object sender, EventArgs e)
+{
+   Panel p = new Panel();
+   Label UPC = new Label();
+   Label Name = new Label();
+   Label Price = new Label();
+   UPC.Text = "078742051451";
+   Name.Text = "Member's Mark Purified Water";
+   Price.Text = "1.00";
+   p.Size = new System.Drawing.Size(250, 100);
+   p.BackColor = System.Drawing.Color.Orange;
+   UPC.Location = new Point(10, 10);
+   Name.Location = new Point(10, 30);
+   Price.Location = new Point(200, 30);
+   p.Controls.Add(UPC);
+   p.Controls.Add(Name);
+   p.Controls.Add(Price);
+
+   flowLayoutPanel1.Controls.Add(p);
+}
+*/
     }
 }
