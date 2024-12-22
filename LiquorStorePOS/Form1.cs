@@ -14,7 +14,8 @@ namespace LiquorStorePOS
         List<Item> itms = new List<Item>();
         List<Category> categories = new List<Category>();  
         List<Size> sizes = new List<Size>();
-
+        double orderSubtotal;
+        double orderTax;
 
         public Form1()
         {
@@ -223,28 +224,50 @@ namespace LiquorStorePOS
 
                 flowLayoutPanel1.Controls.Add(p);
 
-                //double itemPrice = theItem.item_price;
 
-                //string formatPrice = itemPrice.ToString("F2");
+                Label subtotal = new Label();
 
-                //listBox2.Items.Add(theItem.item_price.ToString("F2"));
+                orderSubtotal += (theItem.item_price);
+
+                subtotal.Text = "Subtotal: " + orderSubtotal.ToString("F2");
+
+                panel4.Controls.Clear();
+
+                panel4.Controls.Add(subtotal);
+
+
+
+                Label taxTotal = new Label();
+
+                orderTax += itemTax;
+
+                taxTotal.Text = "Tax: " + orderTax.ToString("F2");
+
+                panel2.Controls.Clear();
+
+                panel2.Controls.Add(taxTotal);
+
+
+
+                Label fullTotal = new Label();
+
+                double addedTotal = orderSubtotal + orderTax;
+
+                fullTotal.Text = "Total: " + addedTotal.ToString("F2");
+
+                panel3.Controls.Clear();
+
+                panel3.Controls.Add(fullTotal);
+
+
+
+
+
+                
 
                 textBox1.Clear();
 
-                //adding the total price of items into label1
 
-                //MessageBox.Show(listBox2.Items[0].ToString());
-
-                //double orderTotal = 0;
-
-                //for (int x = 0; x < listBox2.Items.Count; x++)
-                //{
-                //    orderTotal += Convert.ToDouble(listBox2.Items[x].ToString());
-                //}
-
-                //MessageBox.Show(orderTotal.ToString());
-
-                //label1.Text = orderTotal.ToString("F2");
 
             }
         }
