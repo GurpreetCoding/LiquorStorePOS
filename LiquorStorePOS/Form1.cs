@@ -1,7 +1,8 @@
 
 using System.Linq.Expressions;
 using System.Linq;
-
+using System.Windows.Forms.VisualStyles;
+using System;
 
 namespace LiquorStorePOS
 {
@@ -203,7 +204,7 @@ namespace LiquorStorePOS
                 string sizeName = sizeDAO.getSizeName(theItem.size_id);
                 //MessageBox.Show(FullName);
                 Name.Text = theItem.item_name;
-                Name.AutoSize = true;
+                Name.AutoSize = false;
 
                 double taxPercent = catDAO.GetTax(theItem.cat_id);
                 double itemTax = Math.Round((theItem.item_price * taxPercent), 2);
@@ -320,10 +321,45 @@ namespace LiquorStorePOS
         private void button1_Click(object sender, EventArgs e)
         {
             //Complete Order Button
+            OrdersDAO ords = new OrdersDAO();
+
+            if (flowLayoutPanel1.HasChildren)
+            {
+                int counter = 0;
+                foreach (Control control in flowLayoutPanel1.Controls)
+                {
+                    int quant = -100;
+                    int item_id = -100;
+                    foreach (Control child in control.Controls)
+                    {
+                        if (child is TextBox && child.Name == "Quantity")
+                        {
+                            TextBox t = (TextBox)child;
+                            quant = int.Parse(t.Text);
+                            
+                        }
+                        if (child is Label && child.Name == "UPC")
+                        {
+                            ItemsDAO searchItms = new ItemsDAO();
+                            Label l = (Label)child;
+                            String SKU = l.Text; 
+                            item_id = searchItms.getItemID(SKU);
+
+                        }
+
+                    }
+
+                    int result = ords.insertOrder(counter.ToString(), DateTime.Now, quant, item_id);
+                    MessageBox.Show(result.ToString());
+                    
+                    
+
+                }
+                counter++;
+
+            }
+
             
-
-
-
         }
         
         

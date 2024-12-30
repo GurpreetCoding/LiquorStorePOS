@@ -68,9 +68,39 @@ namespace LiquorStorePOS
 
         }
 
-        public void insertOrder(int row_id, String order_id, DateTime dateTime, int quantity, int item_id)
+        public int insertOrder(String order_id, DateTime dateTime, int quantity, int item_id)
         {
-            /* insert order information into database */
+            MessageBox.Show("hi" + " " + order_id + " " + dateTime.ToString() + " " + quantity.ToString() +" " + item_id.ToString());
+            try
+            {
+                /* insert order information into database */
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand("INSERT INTO `orders`(`order_id`, `date_created`, `quantity`, `item_id`) " +
+                    "VALUES (@orderid, @dateTime,@quantity, @itemID)", connection);
+
+                command.Parameters.AddWithValue("@orderid", order_id);
+                command.Parameters.AddWithValue("@dateTime", dateTime);
+                command.Parameters.AddWithValue("@quantity", quantity);
+                command.Parameters.AddWithValue("@itemID", item_id);
+
+                
+
+                
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return -1;
+            }
+            
+
         }
 
     }

@@ -13,6 +13,33 @@ namespace LiquorStorePOS
     {
         string connectionString = "datasource=localhost;port=3306;username=root;database=liquordb;";
 
+        public int getItemID(string itemSKU)
+        {
+            int itemID = 0;
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand("Select item_id FROM ITEM WHERE item_sku = @item_sku", connection);
+
+            command.Parameters.AddWithValue("@item_sku", itemSKU);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    itemID = reader.GetInt32(0);
+
+                }
+            }
+
+            connection.Close();
+
+            return itemID;
+        }
+
+
         public double getItemCost(int item_id)
         {
             double itemsCost = 0.0;
