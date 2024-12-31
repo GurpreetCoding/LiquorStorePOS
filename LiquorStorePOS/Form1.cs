@@ -19,6 +19,7 @@ namespace LiquorStorePOS
         List<Size> sizes = new List<Size>();
         double orderSubtotal;
         double orderTax;
+        String previousQuant = "";
 
         public Form1()
         {
@@ -178,6 +179,7 @@ namespace LiquorStorePOS
                 //listBox1.Items.Add(theItem.item_name.ToString());
 
                 Panel p = new Panel();
+                p.Name = "Item Panel";
                 p.Size = new System.Drawing.Size(475, 100);
                 p.BackColor = System.Drawing.Color.Lavender;
 
@@ -228,6 +230,8 @@ namespace LiquorStorePOS
 
 
                 TextBox quantityBox = new TextBox();
+
+                quantityBox.ReadOnly = true;
 
                 quantityBox.Location = new Point(150, 50);
 
@@ -342,7 +346,7 @@ namespace LiquorStorePOS
                         {
                             ItemsDAO searchItms = new ItemsDAO();
                             Label l = (Label)child;
-                            String SKU = l.Text; 
+                            String SKU = l.Text;
                             item_id = searchItms.getItemID(SKU);
 
                         }
@@ -359,35 +363,70 @@ namespace LiquorStorePOS
 
             }
 
-            
+            flowLayoutPanel1.Controls.Clear();
+            panel4.Controls.Clear();
+            panel3.Controls.Clear();
+            panel2.Controls.Clear();
+            orderSubtotal = 0;
+            orderTax = 0;
+
+
+
         }
-        
-        
-        
-        
-        
-        
-        /*
+        /**
+        public void quantityBox_KeyDown(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                MessageBox.Show("Hi");
+                TextBox quantityBox = (TextBox)sender;
+                previousText = quantityBox.Text;
+                MessageBox.Show(previousText + quantityBox.Text);
+                Control parentControl = quantityBox.Parent;
+                if (parentControl != null)
+                {
+                    MessageBox.Show(parentControl.Name);
+                    ItemsDAO itemDAO = new ItemsDAO();
+                    Item i = itemDAO.getItemBySKU(parentControl.Controls["UPC"].Text);
+                    MessageBox.Show(i.item_name);
+                    orderSubtotal -= (i.item_price * (int.Parse(quantityBox.Text)));
+
+
+                }
+                
+            }
+            */
+
+
+
+    }
+
+
+
+
+
+
+    /*
 private void button2_Click(object sender, EventArgs e)
 {
-   Panel p = new Panel();
-   Label UPC = new Label();
-   Label Name = new Label();
-   Label Price = new Label();
-   UPC.Text = "078742051451";
-   Name.Text = "Member's Mark Purified Water";
-   Price.Text = "1.00";
-   p.Size = new System.Drawing.Size(250, 100);
-   p.BackColor = System.Drawing.Color.Orange;
-   UPC.Location = new Point(10, 10);
-   Name.Location = new Point(10, 30);
-   Price.Location = new Point(200, 30);
-   p.Controls.Add(UPC);
-   p.Controls.Add(Name);
-   p.Controls.Add(Price);
+Panel p = new Panel();
+Label UPC = new Label();
+Label Name = new Label();
+Label Price = new Label();
+UPC.Text = "078742051451";
+Name.Text = "Member's Mark Purified Water";
+Price.Text = "1.00";
+p.Size = new System.Drawing.Size(250, 100);
+p.BackColor = System.Drawing.Color.Orange;
+UPC.Location = new Point(10, 10);
+Name.Location = new Point(10, 30);
+Price.Location = new Point(200, 30);
+p.Controls.Add(UPC);
+p.Controls.Add(Name);
+p.Controls.Add(Price);
 
-   flowLayoutPanel1.Controls.Add(p);
+flowLayoutPanel1.Controls.Add(p);
 }
 */
-    }
 }
