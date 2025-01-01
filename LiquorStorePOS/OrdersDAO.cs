@@ -103,5 +103,30 @@ namespace LiquorStorePOS
 
         }
 
+        public String getOrderID()
+        {
+            String orderID = "";
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand("Select order_id FROM ORDERS ORDER BY row_id DESC LIMIT 1", connection);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    orderID = reader.GetString(0);
+
+                }
+            }
+            MessageBox.Show(orderID);
+            connection.Close();
+            return orderID;
+
+        }
+
+
     }
 }

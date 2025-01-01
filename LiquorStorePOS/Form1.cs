@@ -21,7 +21,7 @@ namespace LiquorStorePOS
         double orderSubtotal;
         double orderTax;
         String previousQuant = "";
-
+        String ordID;
         public Form1()
         {
             InitializeComponent();
@@ -436,10 +436,14 @@ namespace LiquorStorePOS
         {
             //Complete Order Button
             OrdersDAO ords = new OrdersDAO();
+            string ordsID = ords.getOrderID();
+            ordsID = ordsID.Replace("ORD_", "");
+
+            int ordsIDInt = int.Parse(ordsID);
+
 
             if (flowLayoutPanel1.HasChildren)
             {
-                int counter = 0;
                 foreach (Control control in flowLayoutPanel1.Controls)
                 {
                     int quant = -100;
@@ -463,13 +467,14 @@ namespace LiquorStorePOS
 
                     }
 
-                    int result = ords.insertOrder(counter.ToString(), DateTime.Now, quant, item_id);
+                    string newOrdID = "ORD_" + ((ordsIDInt + 1).ToString());
+
+                    int result = ords.insertOrder(newOrdID, DateTime.Now, quant, item_id);
                     MessageBox.Show(result.ToString());
                     
                     
 
                 }
-                counter++;
 
             }
 
