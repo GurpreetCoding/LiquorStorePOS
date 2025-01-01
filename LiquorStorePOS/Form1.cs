@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using System.Windows.Forms.VisualStyles;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace LiquorStorePOS
 {
@@ -190,6 +191,7 @@ namespace LiquorStorePOS
                 Label Size = new Label();
                 Label TotalPrice = new Label();
                 Button Remove = new Button();
+                Remove.Click += Remove_Click;
                 Remove.Size = new System.Drawing.Size(50, 25);
 
                 UPC.Location = new Point(10, 10);
@@ -318,6 +320,114 @@ namespace LiquorStorePOS
                 textBox1.Clear();
 
 
+
+            }
+        }
+
+        private void Remove_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hi");
+
+            Button delete = (Button)sender;
+            Control parentControl = delete.Parent;
+            if (parentControl != null)
+            {
+                MessageBox.Show(parentControl.Name);
+                ItemsDAO itemDAO = new ItemsDAO();
+                Item i = itemDAO.getItemBySKU(parentControl.Controls["UPC"].Text);
+                MessageBox.Show(i.item_name);
+                String quant = parentControl.Controls["Quantity"].Text;
+                MessageBox.Show(quant);
+                if(int.Parse(quant) > 1)
+                {
+                    MessageBox.Show("Inside: " + quant);
+                    TextBox quantityTextBox = parentControl.Controls["Quantity"] as TextBox;
+                    quantityTextBox.Clear();
+                    quantityTextBox.Text = (int.Parse(quant) - 1).ToString();
+
+                    Label subtotal = new Label();
+
+                    orderSubtotal -= i.item_price;
+
+                    subtotal.Text = "Subtotal: " + orderSubtotal.ToString("F2");
+
+                    panel4.Controls.Clear();
+
+                    panel4.Controls.Add(subtotal);
+
+
+                    Label taxTotal = new Label();
+
+                    CategoryDAO catDAO = new CategoryDAO(); 
+
+                    double taxPercent = catDAO.GetTax(i.cat_id);
+                    double itemTax = Math.Round((i.item_price * taxPercent), 2);
+
+                    orderTax -= itemTax;
+
+                    taxTotal.Text = "Tax: " + orderTax.ToString("F2");
+
+                    panel2.Controls.Clear();
+
+                    panel2.Controls.Add(taxTotal);
+
+
+                    Label fullTotal = new Label();
+
+                    double addedTotal = orderSubtotal + orderTax;
+
+                    fullTotal.Text = "Total: " + addedTotal.ToString("F2");
+
+                    panel3.Controls.Clear();
+
+                    panel3.Controls.Add(fullTotal);
+
+
+                }
+                if(int.Parse(quant) == 1)
+                {
+                    TextBox quantityTextBox = parentControl.Controls["Quantity"] as TextBox;
+
+                    Label subtotal = new Label();
+
+                    orderSubtotal -= i.item_price;
+
+                    subtotal.Text = "Subtotal: " + orderSubtotal.ToString("F2");
+
+                    panel4.Controls.Clear();
+
+                    panel4.Controls.Add(subtotal);
+
+
+                    Label taxTotal = new Label();
+
+                    CategoryDAO catDAO = new CategoryDAO();
+
+                    double taxPercent = catDAO.GetTax(i.cat_id);
+                    double itemTax = Math.Round((i.item_price * taxPercent), 2);
+
+                    orderTax -= itemTax;
+
+                    taxTotal.Text = "Tax: " + orderTax.ToString("F2");
+
+                    panel2.Controls.Clear();
+
+                    panel2.Controls.Add(taxTotal);
+
+
+                    Label fullTotal = new Label();
+
+                    double addedTotal = orderSubtotal + orderTax;
+
+                    fullTotal.Text = "Total: " + addedTotal.ToString("F2");
+
+                    panel3.Controls.Clear();
+
+                    panel3.Controls.Add(fullTotal);
+
+                    parentControl.Parent.Controls.Remove(parentControl);
+
+                }
 
             }
         }
