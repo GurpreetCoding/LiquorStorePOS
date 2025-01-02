@@ -489,30 +489,98 @@ namespace LiquorStorePOS
 
 
         }
-        /**
-        public void quantityBox_KeyDown(object sender, KeyPressEventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
         {
-            
-            if (e.KeyChar == (char)Keys.Enter)
+            //Displays the Analytics of All orders such as total Sales, average Margin and total profit made. 
+
+            OrdersDAO ordersDAO = new OrdersDAO();
+            List<Orders> orderList = ordersDAO.getAllOrders();
+
+            double totalSales = 0;
+            double totalCost = 0;
+
+            foreach (Orders o in orderList) 
             {
-                MessageBox.Show("Hi");
-                TextBox quantityBox = (TextBox)sender;
-                previousText = quantityBox.Text;
-                MessageBox.Show(previousText + quantityBox.Text);
-                Control parentControl = quantityBox.Parent;
-                if (parentControl != null)
-                {
-                    MessageBox.Show(parentControl.Name);
-                    ItemsDAO itemDAO = new ItemsDAO();
-                    Item i = itemDAO.getItemBySKU(parentControl.Controls["UPC"].Text);
-                    MessageBox.Show(i.item_name);
-                    orderSubtotal -= (i.item_price * (int.Parse(quantityBox.Text)));
+                int quantity = o.quantity;
+                ItemsDAO itemsDAO = new ItemsDAO();
+                double item_price = itemsDAO.getItemPrice(o.item_id);
+                double item_cost = itemsDAO.getItemCost(o.item_id);
 
-
-                }
-                
+                totalSales += quantity * item_price;
+                totalCost += quantity * item_cost;
             }
-            */
+
+            Label totalSalesLabel = new Label();
+
+            totalSalesLabel.ForeColor = Color.Black;
+
+            totalSalesLabel.Text = "Total Sales: " + totalSales.ToString("F2");
+
+            totalSalesPanel.Controls.Clear();
+
+            totalSalesPanel.Controls.Add(totalSalesLabel);
+
+
+
+            Label avgMarginLabel = new Label();
+
+            avgMarginLabel.ForeColor = Color.Black;
+
+            avgMarginLabel.AutoSize = true;
+
+            avgMarginLabel.Text = "Average Margin: " + ((1 - (totalCost / totalSales))*100).ToString("F2") + "%";
+
+            avgMarginPanel.Controls.Clear();   
+
+            avgMarginPanel.Controls.Add(avgMarginLabel);
+
+
+            Label totalProfitLabel = new Label();
+
+            totalProfitLabel.ForeColor = Color.White;
+
+            totalProfitLabel.AutoSize = true;
+
+            totalProfitLabel.Text = "Total Profit: " + (totalSales - totalCost).ToString("F2");
+
+            totalProfitPanel.Controls.Clear(); 
+
+            totalProfitPanel.Controls.Add(totalProfitLabel);    
+
+
+
+
+
+
+
+
+        }
+
+        /**
+public void quantityBox_KeyDown(object sender, KeyPressEventArgs e)
+{
+   
+   if (e.KeyChar == (char)Keys.Enter)
+   {
+       MessageBox.Show("Hi");
+       TextBox quantityBox = (TextBox)sender;
+       previousText = quantityBox.Text;
+       MessageBox.Show(previousText + quantityBox.Text);
+       Control parentControl = quantityBox.Parent;
+       if (parentControl != null)
+       {
+           MessageBox.Show(parentControl.Name);
+           ItemsDAO itemDAO = new ItemsDAO();
+           Item i = itemDAO.getItemBySKU(parentControl.Controls["UPC"].Text);
+           MessageBox.Show(i.item_name);
+           orderSubtotal -= (i.item_price * (int.Parse(quantityBox.Text)));
+
+
+       }
+       
+   }
+   */
 
 
 

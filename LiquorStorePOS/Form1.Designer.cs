@@ -36,7 +36,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.totalProfitPanel = new System.Windows.Forms.Panel();
+            this.avgMarginPanel = new System.Windows.Forms.Panel();
+            this.totalSalesPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -98,10 +104,58 @@
             // 
             // panel5
             // 
-            this.panel5.Location = new System.Drawing.Point(553, 68);
+            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.label1);
+            this.panel5.Controls.Add(this.totalProfitPanel);
+            this.panel5.Controls.Add(this.avgMarginPanel);
+            this.panel5.Controls.Add(this.totalSalesPanel);
+            this.panel5.Location = new System.Drawing.Point(954, 68);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.Size = new System.Drawing.Size(200, 331);
             this.panel5.TabIndex = 22;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 268);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(194, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Run Stats";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(74, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Analytics";
+            // 
+            // totalProfitPanel
+            // 
+            this.totalProfitPanel.BackColor = System.Drawing.Color.OliveDrab;
+            this.totalProfitPanel.Location = new System.Drawing.Point(3, 182);
+            this.totalProfitPanel.Name = "totalProfitPanel";
+            this.totalProfitPanel.Size = new System.Drawing.Size(194, 61);
+            this.totalProfitPanel.TabIndex = 2;
+            // 
+            // avgMarginPanel
+            // 
+            this.avgMarginPanel.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.avgMarginPanel.Location = new System.Drawing.Point(3, 115);
+            this.avgMarginPanel.Name = "avgMarginPanel";
+            this.avgMarginPanel.Size = new System.Drawing.Size(194, 61);
+            this.avgMarginPanel.TabIndex = 1;
+            // 
+            // totalSalesPanel
+            // 
+            this.totalSalesPanel.BackColor = System.Drawing.Color.PowderBlue;
+            this.totalSalesPanel.Location = new System.Drawing.Point(3, 48);
+            this.totalSalesPanel.Name = "totalSalesPanel";
+            this.totalSalesPanel.Size = new System.Drawing.Size(194, 61);
+            this.totalSalesPanel.TabIndex = 0;
             // 
             // Form1
             // 
@@ -116,6 +170,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,5 +186,10 @@
         private Panel panel2;
         private Button button1;
         private Panel panel5;
+        private Button button2;
+        private Label label1;
+        private Panel totalProfitPanel;
+        private Panel avgMarginPanel;
+        private Panel totalSalesPanel;
     }
 }
