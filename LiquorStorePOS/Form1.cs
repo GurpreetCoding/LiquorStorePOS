@@ -20,11 +20,12 @@ namespace LiquorStorePOS
         List<Size> sizes = new List<Size>();
         double orderSubtotal;
         double orderTax;
-        String previousQuant = "";
-        String ordID;
         public Form1()
         {
             InitializeComponent();
+
+            textBox1.KeyPress += textBox1_KeyPress;
+            button1.Click += button1_Click;
         }
 
 

@@ -28,89 +28,97 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            panel1 = new Panel();
-            panel4 = new Panel();
-            panel3 = new Panel();
-            panel2 = new Panel();
-            button1 = new Button();
-            panel1.SuspendLayout();
-            SuspendLayout();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(12, 39);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new System.Drawing.Size(500, 23);
-            textBox1.TabIndex = 14;
-            textBox1.KeyPress += textBox1_KeyPress;
+            this.textBox1.Location = new System.Drawing.Point(12, 39);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(500, 23);
+            this.textBox1.TabIndex = 14;
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.BackColor = Color.White;
-            flowLayoutPanel1.Location = new Point(12, 68);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new System.Drawing.Size(500, 500);
-            flowLayoutPanel1.TabIndex = 19;
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 68);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(500, 500);
+            this.flowLayoutPanel1.TabIndex = 19;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.White;
-            panel1.Controls.Add(panel4);
-            panel1.Controls.Add(panel3);
-            panel1.Controls.Add(panel2);
-            panel1.Location = new Point(12, 583);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(500, 96);
-            panel1.TabIndex = 20;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.panel3);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Location = new System.Drawing.Point(12, 583);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(500, 96);
+            this.panel1.TabIndex = 20;
             // 
             // panel4
             // 
-            panel4.Location = new Point(17, 22);
-            panel4.Name = "panel4";
-            panel4.Size = new System.Drawing.Size(146, 53);
-            panel4.TabIndex = 2;
+            this.panel4.Location = new System.Drawing.Point(17, 22);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(146, 53);
+            this.panel4.TabIndex = 2;
             // 
             // panel3
             // 
-            panel3.Location = new Point(333, 22);
-            panel3.Name = "panel3";
-            panel3.Size = new System.Drawing.Size(164, 53);
-            panel3.TabIndex = 1;
+            this.panel3.Location = new System.Drawing.Point(333, 22);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(164, 53);
+            this.panel3.TabIndex = 1;
             // 
             // panel2
             // 
-            panel2.Location = new Point(169, 22);
-            panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(158, 53);
-            panel2.TabIndex = 0;
+            this.panel2.Location = new System.Drawing.Point(169, 22);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(158, 53);
+            this.panel2.TabIndex = 0;
             // 
             // button1
             // 
-            button1.Location = new Point(345, 698);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(167, 23);
-            button1.TabIndex = 21;
-            button1.Text = "Complete Order";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Location = new System.Drawing.Point(345, 698);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(167, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Complete Order";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.Location = new System.Drawing.Point(553, 68);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 100);
+            this.panel5.TabIndex = 22;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1370, 746);
-            Controls.Add(button1);
-            Controls.Add(panel1);
-            Controls.Add(flowLayoutPanel1);
-            Controls.Add(textBox1);
-            Name = "Form1";
-            Text = "Form1";
-            panel1.ResumeLayout(false);
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1370, 746);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.textBox1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.panel1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -121,5 +129,6 @@
         private Panel panel3;
         private Panel panel2;
         private Button button1;
+        private Panel panel5;
     }
 }
