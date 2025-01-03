@@ -24,6 +24,8 @@ namespace LiquorStorePOS
         {
             InitializeComponent();
 
+            panel5.Hide();
+
             textBox1.KeyPress += textBox1_KeyPress;
             button1.Click += button1_Click;
         }
@@ -554,6 +556,40 @@ namespace LiquorStorePOS
 
 
 
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //This method hides the POS Screen
+            flowLayoutPanel1.Hide();
+            textBox1.Hide();
+            panel1.Hide();
+            button1.Hide();
+
+            panel5.Hide();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //This method shows the POS Screen
+            flowLayoutPanel1.Show();
+            textBox1.Show();
+            panel1.Show();
+            button1.Show();
+
+            panel5.Hide();
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            //This method shows the analytics menu
+            flowLayoutPanel1.Hide();
+            textBox1.Hide();
+            panel1.Hide();
+            button1.Hide();
+
+            panel5.Show();
 
         }
 

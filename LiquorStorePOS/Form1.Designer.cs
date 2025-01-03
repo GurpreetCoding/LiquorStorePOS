@@ -41,13 +41,26 @@
             this.totalProfitPanel = new System.Windows.Forms.Panel();
             this.avgMarginPanel = new System.Windows.Forms.Panel();
             this.totalSalesPanel = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 39);
+            this.textBox1.Location = new System.Drawing.Point(270, 39);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(500, 23);
             this.textBox1.TabIndex = 14;
@@ -56,7 +69,7 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 68);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(270, 68);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(500, 500);
             this.flowLayoutPanel1.TabIndex = 19;
@@ -67,7 +80,7 @@
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(12, 583);
+            this.panel1.Location = new System.Drawing.Point(270, 574);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(500, 96);
             this.panel1.TabIndex = 20;
@@ -95,7 +108,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(345, 698);
+            this.button1.Location = new System.Drawing.Point(603, 687);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(167, 23);
             this.button1.TabIndex = 21;
@@ -109,7 +122,7 @@
             this.panel5.Controls.Add(this.totalProfitPanel);
             this.panel5.Controls.Add(this.avgMarginPanel);
             this.panel5.Controls.Add(this.totalSalesPanel);
-            this.panel5.Location = new System.Drawing.Point(954, 68);
+            this.panel5.Location = new System.Drawing.Point(804, 39);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(200, 331);
             this.panel5.TabIndex = 22;
@@ -157,11 +170,97 @@
             this.totalSalesPanel.Size = new System.Drawing.Size(194, 61);
             this.totalSalesPanel.TabIndex = 0;
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.panel6.Controls.Add(this.panel10);
+            this.panel6.Controls.Add(this.panel9);
+            this.panel6.Controls.Add(this.panel8);
+            this.panel6.Controls.Add(this.label2);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Location = new System.Drawing.Point(-3, -2);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(194, 751);
+            this.panel6.TabIndex = 23;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.button5);
+            this.panel10.Location = new System.Drawing.Point(15, 252);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(157, 46);
+            this.panel10.TabIndex = 26;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(3, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(151, 40);
+            this.button5.TabIndex = 0;
+            this.button5.Text = "Analytics";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.button4);
+            this.panel9.Location = new System.Drawing.Point(15, 185);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(157, 46);
+            this.panel9.TabIndex = 25;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(3, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(151, 43);
+            this.button4.TabIndex = 0;
+            this.button4.Text = "Item Creation";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.button3);
+            this.panel8.Location = new System.Drawing.Point(15, 118);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(157, 46);
+            this.panel8.TabIndex = 24;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(3, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(151, 40);
+            this.button3.TabIndex = 0;
+            this.button3.Text = "POS";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Black", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(15, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(157, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "LiquorPOS";
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel7.Location = new System.Drawing.Point(184, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(10, 751);
+            this.panel7.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 746);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
@@ -172,6 +271,11 @@
             this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +295,14 @@
         private Panel totalProfitPanel;
         private Panel avgMarginPanel;
         private Panel totalSalesPanel;
+        private Panel panel6;
+        private Panel panel7;
+        private Panel panel10;
+        private Button button5;
+        private Panel panel9;
+        private Button button4;
+        private Panel panel8;
+        private Button button3;
+        private Label label2;
     }
 }
