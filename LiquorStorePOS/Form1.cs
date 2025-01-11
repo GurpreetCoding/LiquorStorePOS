@@ -25,6 +25,7 @@ namespace LiquorStorePOS
             InitializeComponent();
 
             panel5.Hide();
+            panel12.Hide();
 
             textBox1.KeyPress += textBox1_KeyPress;
             button1.Click += button1_Click;
@@ -98,7 +99,7 @@ namespace LiquorStorePOS
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //this button loads the items table
+            //this button loads the cat table
             CategoryDAO categoryDAO = new CategoryDAO();
 
             categories = categoryDAO.getAllItems();
@@ -110,7 +111,7 @@ namespace LiquorStorePOS
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //this button loads the items table
+            //this button loads the size table
             SizeDAO sizeDAO = new SizeDAO();
 
             sizes = sizeDAO.getAllItems();
@@ -561,36 +562,156 @@ namespace LiquorStorePOS
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //This method hides the POS Screen
-            flowLayoutPanel1.Hide();
-            textBox1.Hide();
-            panel1.Hide();
-            button1.Hide();
+            //This method hides the POS Screen and shows Item Creation
+            panel11.Hide();
 
             panel5.Hide();
+
+            panel12.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //This method shows the POS Screen
-            flowLayoutPanel1.Show();
-            textBox1.Show();
-            panel1.Show();
-            button1.Show();
+            panel11.Show();
 
             panel5.Hide();
+            panel12.Hide();
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
             //This method shows the analytics menu
-            flowLayoutPanel1.Hide();
-            textBox1.Hide();
-            panel1.Hide();
-            button1.Hide();
+            panel11.Hide();
+            panel12.Hide();
 
             panel5.Show();
 
+        }
+
+        private void loadItemsButton_Click(object sender, EventArgs e)
+        {
+            //this button loads the items table
+            ItemsDAO itemsDAO = new ItemsDAO();
+
+            itms = itemsDAO.getAllItems();
+
+            itemsBindingSource.DataSource = itms;
+
+            dataGridView1.DataSource = itemsBindingSource;
+        }
+
+        private void loadCategoryButton_Click(object sender, EventArgs e)
+        {
+            //this button loads the cats table
+            CategoryDAO categoryDAO = new CategoryDAO();
+
+            categories = categoryDAO.getAllItems();
+
+            categoryBindingSource.DataSource = categories;
+
+            dataGridView2.DataSource = categoryBindingSource;
+        }
+
+        private void loadSizesButton_Click(object sender, EventArgs e)
+        {
+            //this button loads the size table
+            SizeDAO sizeDAO = new SizeDAO();
+
+            sizes = sizeDAO.getAllItems();
+
+            sizeBindingSource.DataSource = sizes;
+
+            dataGridView3.DataSource = sizeBindingSource;
+        }
+
+        private void createItemButton_Click(object sender, EventArgs e)
+        {
+            string item_sku;
+            string item_name;
+            string cat_name;
+            double item_price;
+            double item_cost;
+            string size_name;
+
+            item_sku = skuTextBox.Text;
+            item_name = itemNameTextBox.Text;
+            cat_name = categoryIDComboBox.Text;
+            item_price = double.Parse(itemPriceTextBox.Text);
+            item_cost = double.Parse(itemCostTextBox.Text);
+            size_name = sizeIDComboBox.Text;
+
+            CategoryDAO catDAO = new CategoryDAO();
+
+            int cat_id = catDAO.getID(cat_name);
+
+            SizeDAO sizeDAO = new SizeDAO();
+
+            int size_id = sizeDAO.getID(size_name);
+
+            ItemsDAO itemsDAO = new ItemsDAO();
+
+            itemsDAO.insertItem(item_sku, item_name, cat_id, item_price, item_cost, size_id);
+
+            skuTextBox.Clear();
+            itemNameTextBox.Clear();
+            categoryIDComboBox.Items.Clear();
+            itemPriceTextBox.Clear();
+            itemCostTextBox.Clear();
+            sizeIDComboBox.Items.Clear();   
+
+
+    }
+
+        private void updateComboBox_Click(object sender, EventArgs e)
+        {
+            CategoryDAO catDAO = new CategoryDAO();
+            List<Category> allCats = catDAO.getAllItems();
+
+            foreach (Category c in allCats)
+            {
+                categoryIDComboBox.Items.Add(c.cat_name);
+            }
+
+            SizeDAO sizeDAO = new SizeDAO();
+            List<Size> sizes = sizeDAO.getAllItems();
+
+            foreach(Size s in sizes)
+            {
+                sizeIDComboBox.Items.Add(s.size_name);
+            }
+
+
+        }
+
+        private void createCategoryButton_Click(object sender, EventArgs e)
+        {
+            string cat_name;
+            double cat_tax;
+
+            cat_name = categoryNameTextBox.Text;
+            cat_tax = double.Parse(categoryTaxTextBox.Text);    
+
+            CategoryDAO catDAO = new CategoryDAO();
+
+            catDAO.insertCategory(cat_name, cat_tax);
+
+            categoryNameTextBox.Clear();
+            categoryTaxTextBox.Clear();
+
+        }
+
+        private void createSizeButton_Click(object sender, EventArgs e)
+        {
+            string size_name;
+
+            size_name = sizeNameTextBox.Text;
+
+            SizeDAO sizeDAO = new SizeDAO();
+
+            sizeDAO.insertSize(size_name);
+
+            sizeNameTextBox.Clear();
         }
 
         /**

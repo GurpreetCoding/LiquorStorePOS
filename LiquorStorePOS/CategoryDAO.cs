@@ -67,5 +67,63 @@ namespace LiquorStorePOS
             connection.Close();
             return taxPercent;
         }
+
+        public int getID(string cat_name)
+        {
+            int catID = 0;
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            connection.Open();
+
+            MySqlCommand command = new MySqlCommand("Select cat_id FROM Category WHERE cat_name = @cat_name", connection);
+
+            command.Parameters.AddWithValue("@cat_name", cat_name);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    catID = reader.GetInt32(0);
+
+                }
+            }
+
+            connection.Close();
+            return catID;
+        }
+
+        public int insertCategory(string cat_name, double cat_tax)
+        {
+            MessageBox.Show("hi" + " " + cat_name + " " + cat_tax + " " );
+            try
+            {
+                /* insert order information into database */
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand("INSERT INTO `category`(`cat_name`, `cat_tax`) " +
+                    "VALUES (@cat_name, @cat_tax)", connection);
+
+                command.Parameters.AddWithValue("@cat_name", cat_name);
+                command.Parameters.AddWithValue("@cat_tax", cat_tax);
+
+
+
+
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return -1;
+            }
+
+
+        }
     }
 }

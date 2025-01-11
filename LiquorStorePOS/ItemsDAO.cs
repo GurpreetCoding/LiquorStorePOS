@@ -169,5 +169,42 @@ namespace LiquorStorePOS
             return theItem;
 
         }
+
+        public int insertItem(string item_sku, string item_name, int cat_id, double item_price, double item_cost, int size_id)
+        {
+            MessageBox.Show("hi" + " " + item_sku + " " + item_name + " " + cat_id + " " + item_price + " " + item_cost + " " + size_id);
+            try
+            {
+                /* insert order information into database */
+
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand("INSERT INTO `item`(`item_sku`, `item_name`, `cat_id`, `item_price`, `item_cost`, `size_id`) " +
+                    "VALUES (@item_sku, @item_name, @cat_id ,@item_price, @item_cost, @size_id)", connection);
+
+                command.Parameters.AddWithValue("@item_sku", item_sku);
+                command.Parameters.AddWithValue("@item_name", item_name);
+                command.Parameters.AddWithValue("@cat_id", cat_id);
+                command.Parameters.AddWithValue("@item_price", item_price);
+                command.Parameters.AddWithValue("@item_cost", item_cost);
+                command.Parameters.AddWithValue("@size_id", size_id);
+
+
+
+
+                int result = command.ExecuteNonQuery();
+                connection.Close();
+                return result;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                return -1;
+            }
+
+
+        }
     }
 }
