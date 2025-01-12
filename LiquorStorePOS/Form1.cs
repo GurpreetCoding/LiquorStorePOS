@@ -93,7 +93,7 @@ namespace LiquorStorePOS
 
 
 
-            MessageBox.Show(marginPercent.ToString());
+            //MessageBox.Show(marginPercent.ToString());
 
         }
 
@@ -180,6 +180,12 @@ namespace LiquorStorePOS
                 CategoryDAO catDAO = new CategoryDAO();
                 //This line gets the item associated with the SKU
                 Item theItem = itemsDAO.getItemBySKU(SKU);
+                if(theItem == null)
+                {
+                    MessageBox.Show("Error: The SKU is incorrect or not in the database");
+                    textBox1.Clear();
+                    return;
+                }
 
                 //listBox1.Items.Add(theItem.item_name.ToString());
 
@@ -330,21 +336,21 @@ namespace LiquorStorePOS
 
         private void Remove_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Hi");
+            //MessageBox.Show("Hi");
 
             Button delete = (Button)sender;
             Control parentControl = delete.Parent;
             if (parentControl != null)
             {
-                MessageBox.Show(parentControl.Name);
+                //MessageBox.Show(parentControl.Name);
                 ItemsDAO itemDAO = new ItemsDAO();
                 Item i = itemDAO.getItemBySKU(parentControl.Controls["UPC"].Text);
-                MessageBox.Show(i.item_name);
+                //MessageBox.Show(i.item_name);
                 String quant = parentControl.Controls["Quantity"].Text;
-                MessageBox.Show(quant);
+                //MessageBox.Show(quant);
                 if(int.Parse(quant) > 1)
                 {
-                    MessageBox.Show("Inside: " + quant);
+                    //MessageBox.Show("Inside: " + quant);
                     TextBox quantityTextBox = parentControl.Controls["Quantity"] as TextBox;
                     quantityTextBox.Clear();
                     quantityTextBox.Text = (int.Parse(quant) - 1).ToString();
@@ -441,10 +447,17 @@ namespace LiquorStorePOS
             //Complete Order Button
             OrdersDAO ords = new OrdersDAO();
             string ordsID = ords.getOrderID();
-            ordsID = ordsID.Replace("ORD_", "");
-
-            int ordsIDInt = int.Parse(ordsID);
-
+            int ordsIDInt;
+            if (ordsID.Equals(""))
+            {
+                ordsIDInt = 1;
+            }
+            else
+            {
+                ordsID = ordsID.Replace("ORD_", "");
+                ordsIDInt = int.Parse(ordsID);
+            }
+            
 
             if (flowLayoutPanel1.HasChildren)
             {
@@ -474,7 +487,7 @@ namespace LiquorStorePOS
                     string newOrdID = "ORD_" + ((ordsIDInt + 1).ToString());
 
                     int result = ords.insertOrder(newOrdID, DateTime.Now, quant, item_id);
-                    MessageBox.Show(result.ToString());
+                    //MessageBox.Show(result.ToString());
                     
                     
 
@@ -656,15 +669,20 @@ namespace LiquorStorePOS
             skuTextBox.Clear();
             itemNameTextBox.Clear();
             categoryIDComboBox.Items.Clear();
+            categoryIDComboBox.ResetText();
             itemPriceTextBox.Clear();
             itemCostTextBox.Clear();
             sizeIDComboBox.Items.Clear();   
+            sizeIDComboBox.ResetText();
 
 
     }
 
         private void updateComboBox_Click(object sender, EventArgs e)
         {
+            categoryIDComboBox.Items.Clear();
+            sizeIDComboBox.Items.Clear();
+
             CategoryDAO catDAO = new CategoryDAO();
             List<Category> allCats = catDAO.getAllItems();
 
